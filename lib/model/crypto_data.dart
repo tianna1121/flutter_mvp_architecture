@@ -3,6 +3,10 @@ class Crypto {
   final String priceUSD;
   final String percentChange1H;
   Crypto({this.name, this.priceUSD, this.percentChange1H});
+  Crypto.fromMap(Map<String, dynamic> map)
+      : name = map['name'],
+        priceUSD = map['price_usd'],
+        percentChange1H = map['percent_change_1h'];
 }
 
 abstract class CryptoRepository {
