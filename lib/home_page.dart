@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -32,6 +33,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Crypto App'),
+        elevation: defaultTargetPlatform == TargetPlatform.iOS ? 0.0 : 5.0,
       ),
       body: _isLoading == true ? CircularProgressIndicator() : _cryptoWidget(),
     );

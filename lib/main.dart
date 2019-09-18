@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'home_page.dart';
@@ -10,7 +11,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Crypto',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.pink),
+      theme: ThemeData(
+          primarySwatch: Colors.pink,
+          primaryColor: defaultTargetPlatform == TargetPlatform.iOS
+              ? Colors.grey[100]
+              : null),
       home: HomePage(),
     );
   }
