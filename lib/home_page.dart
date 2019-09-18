@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:async';
 import 'dart:convert';
 
 class HomePage extends StatefulWidget {
@@ -10,6 +9,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List _currencies;
+  bool _isLoading = true;
   final List<MaterialColor> _colors = [Colors.blue, Colors.indigo, Colors.red];
 
   @override
@@ -18,10 +18,13 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  getCurrencies() async {
+  void getCurrencies() async {
     String cryptoUrl = 'https://api.coinmarketcap.com/v1/ticker/?limit=50';
     http.Response response = await http.get(cryptoUrl);
     _currencies = json.decode(response.body);
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   @override
@@ -30,7 +33,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('Crypto App'),
       ),
-      body: _cryptoWidget(),
+      body: _isLoading == true ? CircularProgressIndicator() : _cryptoWidget(),
     );
   }
 
